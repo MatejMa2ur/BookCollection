@@ -1,6 +1,0 @@
-HP;JKRowwwwwwling;Drama, Novel, Fantasy;2003;10101001;Simon
-asdf;asdf;Sci-fi,Drama,Novel;asdf;asdf;asdf
-Hunger Games;Suzan COlins;Drama, Novel, Sci-fi;2003;100011010;Suzan
-abc;def;1;ghi;jkl;mno
-abc;def;1;g;h;j
-a;b;1;c;d;e

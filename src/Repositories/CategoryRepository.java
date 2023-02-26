@@ -1,45 +1,59 @@
 package Repositories;
 
+import Models.Category;
 import Repositories.Interfaces.ICategoryRepository;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CategoryRepository implements ICategoryRepository {
     private String _url;
     public CategoryRepository(String url) {
         _url = url;
     }
-    public ResultSet getCategories() {
+    public List<Category> getCategories() {
         try (Connection conn = DriverManager.getConnection(_url)){
             String sql = "SELECT * FROM category;";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            return preparedStatement.executeQuery();
+            var rs = preparedStatement.executeQuery();
+            List<Category> categories = new ArrayList<>();
+            while (rs.next()) {
+                categories.add(new Category(rs.getInt("id"), rs.getString("name")));
+            }
+            return categories;
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
-            return null;
         }
+        return null;
     }
-    public ResultSet getCategory(int id) {
+    public Category getCategory(int id) {
         try (Connection conn = DriverManager.getConnection(_url)){
             String sql = "SELECT * FROM category WHERE id = ?;";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, id);
-            return preparedStatement.executeQuery();
+            var rs = preparedStatement.executeQuery();
+            if(rs.next()) {
+                return new Category(rs.getInt("id"), rs.getString("name"));
+            }
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
-            return null;
         }
+        return null;
     }
-    public ResultSet getCategory(String name) {
+    public Category getCategory(String name) {
         try (Connection conn = DriverManager.getConnection(_url)){
             String sql = "SELECT * FROM category WHERE name = ?;";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, name);
-            return preparedStatement.executeQuery();
+            var rs = preparedStatement.executeQuery();
+            if(rs.next()) {
+                return new Category(rs.getInt("id"), rs.getString("name"));
+            }
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
-            return null;
         }
+        return null;
     }
     public void addCategory(String name) {
         try (Connection conn = DriverManager.getConnection(_url)){

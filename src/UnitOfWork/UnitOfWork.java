@@ -1,3 +1,5 @@
+package UnitOfWork;
+
 import Repositories.*;
 import Repositories.Interfaces.*;
 
@@ -14,7 +16,6 @@ public class UnitOfWork {
     public UnitOfWork() {
         _connection = "jdbc:sqlite:Database\\Library.db";
         openConnection();
-        System.out.println("Connection opened");
         BookRepository = new BookRepository(_connection);
         CategoryRepository =  new CategoryRepository(_connection);
     }
@@ -38,8 +39,8 @@ public class UnitOfWork {
             stmt.execute(sql);
             sql = "CREATE TABLE IF NOT EXISTS categoryBookConnect (\n"
                     + "	categoryId integer NOT NULL,\n"
-                    + "	bookId text NOT NULL\n"
-                    + " PRIMARY KEY(categpryId,bookId) \n"
+                    + "	bookId text NOT NULL,\n"
+                    + " PRIMARY KEY(categoryId,bookId) \n"
                     + " );";
             stmt = conn.createStatement();
             stmt.execute(sql);

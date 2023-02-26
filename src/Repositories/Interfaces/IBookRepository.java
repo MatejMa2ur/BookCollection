@@ -3,11 +3,12 @@ package Repositories.Interfaces;
 import Models.Book;
 
 import java.sql.ResultSet;
+import java.util.List;
 
 public interface IBookRepository {
-    void addBook(Book book);
+    int addBook(Book book);
     void deleteBook(int id);
     void updateBook(Book book);
-    ResultSet getBooks();
-    ResultSet getBook(int id);
+    List<Book> getBooks();
+    Book getBook(int id);
 }
