@@ -60,7 +60,7 @@ public class BookRepository implements IBookRepository {
             ResultSet rs = stmt.executeQuery(sql);
             List<Book> books = new ArrayList<>();
             while (rs.next()) {
-                books.add(new Book(rs.getString("title"), rs.getString("author"), rs.getString("publisher"), rs.getString("ISBN"), rs.getString("publicationYear")));
+                books.add(new Book(rs.getInt("id"), rs.getString("title"), rs.getString("author"), rs.getString("publisher"), rs.getString("ISBN"), rs.getString("publicationYear")));
             }
             return books;
         } catch (SQLException e) {
@@ -74,7 +74,7 @@ public class BookRepository implements IBookRepository {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
-            return new Book(rs.getString("title"), rs.getString("author"), rs.getString("publisher"), rs.getString("ISBN"), rs.getString("publicationYear"));
+            return new Book(rs.getInt("id"), rs.getString("title"), rs.getString("author"), rs.getString("publisher"), rs.getString("ISBN"), rs.getString("publicationYear"));
         } catch (SQLException e) {
             System.out.println("Get book error: " + e.getMessage());
         }
