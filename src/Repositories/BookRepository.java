@@ -40,7 +40,7 @@ public class BookRepository implements IBookRepository {
     }
     public void updateBook(Book book) {
         try (Connection conn = DriverManager.getConnection(_url)){
-            String sql = "UPDATE book SET name = ?, author = ?, publicationYear = ?, ISBN = ?, publisher = ? WHERE id = ?;";
+            String sql = "UPDATE book SET title = ?, author = ?, publicationYear = ?, ISBN = ?, publisher = ? WHERE id = ?;";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, book.getTitle());
             preparedStatement.setString(2, book.getAuthor());
@@ -48,7 +48,7 @@ public class BookRepository implements IBookRepository {
             preparedStatement.setString(4, book.getISBN());
             preparedStatement.setString(5, book.getPublisher());
             preparedStatement.setInt(6, book.getId());
-            preparedStatement.executeUpdate();
+            preparedStatement.execute();
         } catch (SQLException e) {
             System.out.println("Update book error: " + e.getMessage());
         }
@@ -60,7 +60,7 @@ public class BookRepository implements IBookRepository {
             ResultSet rs = stmt.executeQuery(sql);
             List<Book> books = new ArrayList<>();
             while (rs.next()) {
-                books.add(new Book(rs.getString("title"), rs.getString("author"), rs.getString("publicationYear"), rs.getString("ISBN"), rs.getString("publisher")));
+                books.add(new Book(rs.getString("title"), rs.getString("author"), rs.getString("publisher"), rs.getString("ISBN"), rs.getString("publicationYear")));
             }
             return books;
         } catch (SQLException e) {
@@ -74,7 +74,7 @@ public class BookRepository implements IBookRepository {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
-            return new Book(rs.getString("title"), rs.getString("author"), rs.getString("publicationYear"), rs.getString("ISBN"), rs.getString("publisher"));
+            return new Book(rs.getString("title"), rs.getString("author"), rs.getString("publisher"), rs.getString("ISBN"), rs.getString("publicationYear"));
         } catch (SQLException e) {
             System.out.println("Get book error: " + e.getMessage());
         }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MainController">
+   <children>
+      <VBox HBox.hgrow="ALWAYS">
+         <children>
+            <TableView fx:id="tableView" prefHeight="200.0" prefWidth="402.0" VBox.vgrow="SOMETIMES">
+              <columns>
+                <TableColumn fx:id="colTitle" prefWidth="75.0" text="Title" />
+                <TableColumn fx:id="colAuthor" prefWidth="75.0" text="Author" />
+                  <TableColumn fx:id="colPublisher" prefWidth="75.0" text="Publisher" />
+                  <TableColumn fx:id="colISBN" prefWidth="75.0" text="ISBN" />
+                  <TableColumn fx:id="colRelease" prefWidth="75.0" text="Release Year" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children>
+      </VBox>
+      <VBox HBox.hgrow="SOMETIMES">
+         <children>
+            <HBox VBox.vgrow="ALWAYS" />
+            <HBox spacing="10.0">
+               <children>
+                  <MFXButton fx:id="btnDeleteBook" onAction="#deleteBook" prefWidth="70.0" text="Delete" />
+                  <MFXButton fx:id="btnEditBook" onAction="#editBook" prefWidth="70.0" text="Edit" />
+                  <MFXButton fx:id="btnAddBook" onAction="#addBook" prefWidth="70.0" text="Add" />
+               </children>
+            </HBox>
+         </children>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" />
+         </padding>
+      </VBox>
+   </children>
+</HBox>
